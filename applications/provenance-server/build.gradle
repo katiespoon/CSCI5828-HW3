@@ -1,0 +1,18 @@
+version "1.0-SNAPSHOT"
+
+dependencies {
+    compile project(":components:articles")
+    compile project(":components:endpoints")
+
+    compile project(":components:rest-support")
+    compile project(":components:workflow-support")
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "io.collective.start.App"
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
